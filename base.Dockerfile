@@ -9,7 +9,7 @@ ARG GCC_VER=11
 RUN apt update 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt install -y git htop sudo curl wget net-tools jq \
-    build-essential cmake ninja-build valgrind gdb doxygen \
+    build-essential cmake ninja-build valgrind gdb rr doxygen \
     clang-${CLANG_VER} clang-tidy-${CLANG_VER} clang-format-${CLANG_VER} clang-tools-${CLANG_VER} \
     gcc-${GCC_VER} g++-${GCC_VER} \
     python3 python3-pip
@@ -27,7 +27,7 @@ ARG INSTALL_ZSH="false"
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-COPY setup.sh /tmp
+COPY scripts/setup.sh /tmp
 RUN /tmp/setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "true" \
     && rm -f /tmp/setup.sh
 #################################################################################################
@@ -54,7 +54,7 @@ RUN pip3 install -r /opt/codechecker/requirements.txt \
     && ln -s /opt/codechecker/bin/CodeChecker /usr/bin/CodeChecker
 
 # Setup cmake utils
-COPY .CodeCheckerIgnore utils.cmake /opt/cmake-utils/
+COPY scripts/.CodeCheckerIgnore scripts/utils.cmake /opt/cmake-utils/
 
 # Cleanup
 RUN export DEBIAN_FRONTEND=noninteractive && apt autoremove -y
