@@ -13,13 +13,13 @@ add_custom_target(
 
 add_custom_target(
     format
-    COMMAND find . -iname *.h -o -iname *.cpp -o -iname *.hpp -o -iname *.cc | xargs clang-format --dry-run --Werror
+    COMMAND find . -path ./build -prune -false -o -iname *.h -o -iname *.cpp -o -iname *.hpp -o -iname *.cc | xargs clang-format --dry-run --Werror
     WORKING_DIRECTORY ..
 )
 
 add_custom_target(
     format-fix
-    COMMAND find . -iname *.h -o -iname *.cpp -o -iname *.hpp -o -iname *.cc | xargs clang-format -i
+    COMMAND find . -path ./build -prune -false -o -iname *.h -o -iname *.cpp -o -iname *.hpp -o -iname *.cc | xargs clang-format -i
     WORKING_DIRECTORY ..
 )
 
