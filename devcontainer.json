@@ -22,8 +22,9 @@
 		"notskm.clang-tidy",
 		"gruntfuggly.todo-tree",
 		"mhutchie.git-graph",
-        "eamodio.gitlens",
-		"redhat.vscode-yaml"
+		"eamodio.gitlens",
+		"redhat.vscode-yaml",
+		"matepek.vscode-catch2-test-adapter"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
