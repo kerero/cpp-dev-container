@@ -6,8 +6,7 @@ add_custom_target(
 
 add_custom_target(
     tidy-fix
-    # The double run-clang-tidy is because when -fix is applied the fixed error are still shown
-    COMMAND run-clang-tidy -p build/ -fix -quiet && run-clang-tidy -p build/
+    COMMAND run-clang-tidy -p build/ -fix -quiet
     WORKING_DIRECTORY ..
 )
 

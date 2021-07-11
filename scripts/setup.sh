@@ -71,6 +71,13 @@ if [ "${USERNAME}" != "root" ] && [ "${EXISTING_NON_ROOT_USER}" != "${USERNAME}"
     EXISTING_NON_ROOT_USER="${USERNAME}"
 fi
 
+# Ensure at least the en_US.UTF-8 UTF-8 locale is available.
+# Common need for both applications and things like the agnoster ZSH theme.
+if ! grep -o -E '^\s*en_US.UTF-8\s+UTF-8' /etc/locale.gen > /dev/null; then
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen 
+    locale-gen
+fi
+
 # ** Shell customization section **
 if [ "${USERNAME}" = "root" ]; then 
     USER_RC_PATH="/root"
