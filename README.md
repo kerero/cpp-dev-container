@@ -19,16 +19,24 @@ and use one of the targets:
 - `format` / `format-fix`
 - `static-analysis`
 
+## Using perf and flame-graph script
+```bash
+cpu-profile <command> <output-path>
+```
+or use perfand flame graph (/opt/flame-graph) manually 
+
 ## Package List
 ### build tools
 * gcc-11
 * clang-12
 * cmake
 * ninja
-### Debug
+### Debug & Profiling
 * valgrind
 * gdb
 * rr
+* perf
+* flame-graph
 ### Code Quality tools
 * clang-[format/tidy/static-analysis]
 * CodeChecker
