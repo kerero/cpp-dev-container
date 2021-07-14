@@ -28,7 +28,8 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 COPY scripts/setup.sh /tmp
-RUN /tmp/setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "true" \
+RUN chmod +x /tmp/setup.sh \
+    && /tmp/setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "true" \
     && rm -f /tmp/setup.sh
 #################################################################################################
 FROM base as perf-builder
@@ -72,7 +73,7 @@ COPY scripts/.CodeCheckerIgnore scripts/utils.cmake /opt/cmake-utils/
 
 #Setup profiling script
 COPY scripts/cpu-profile.sh /opt
-RUN ln -s /opt/cpu-profile.sh /usr/bin/cpu-profile
+RUN chmod +x /opt/cpu-profile.sh && ln -s /opt/cpu-profile.sh /usr/bin/cpu-profile
 
 # Cleanup
 RUN export DEBIAN_FRONTEND=noninteractive && apt autoremove -y
