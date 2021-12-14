@@ -23,7 +23,7 @@ and use one of the targets:
 ```bash
 cpu-profile <command> <output-path>
 ```
-or use perfand flame graph (/opt/flame-graph) manually 
+or use perf and flame graph (/opt/flame-graph) manually 
 
 ## Package List
 ### build tools
