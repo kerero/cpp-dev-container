@@ -28,7 +28,7 @@ or use perf and flame graph (/opt/flame-graph) manually
 ## Package List
 ### build tools
 * gcc-11
-* clang-12
+* clang-13
 * cmake
 * ninja
 ### Debug & Profiling

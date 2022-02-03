@@ -1,13 +1,13 @@
 ARG OS=ubuntu
-ARG TAG=hirsute
+ARG TAG=impish
 
 FROM ${OS}:${TAG} as base
 
 # Install required packages
-ARG CLANG_VER=12
+ARG CLANG_VER=13
 ARG GCC_VER=11
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt update && apt install -y git htop sudo curl wget net-tools jq locales\
+    && apt update && apt install -y git htop sudo curl wget net-tools jq locales \
     build-essential cmake ninja-build valgrind gdb rr doxygen \
     clang-${CLANG_VER} clang-tidy-${CLANG_VER} clang-format-${CLANG_VER} clang-tools-${CLANG_VER} \
     gcc-${GCC_VER} g++-${GCC_VER} \
