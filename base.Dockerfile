@@ -1,18 +1,28 @@
-ARG OS=ubuntu
-ARG TAG=impish
+ARG OS=ubuntu 
+ARG TAG=focal
 
 FROM ${OS}:${TAG} as base
 
 # Install required packages
-ARG CLANG_VER=13
+ARG CLANG_VER=14
 ARG GCC_VER=11
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt update && apt install -y git htop sudo curl wget net-tools jq locales \
+
+RUN export DEBIAN_FRONTEND=noninteractive && apt update \
+    && apt install -y git htop sudo curl wget net-tools jq locales software-properties-common 
+# for gcc
+RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
+# for cmake 
+RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add - \
+    && sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main'
+RUN apt update && apt install -y \
     build-essential cmake ninja-build valgrind gdb rr doxygen \
-    clang-${CLANG_VER} clang-tidy-${CLANG_VER} clang-format-${CLANG_VER} clang-tools-${CLANG_VER} \
-    gcc-${GCC_VER} g++-${GCC_VER} \
     python3 python3-pip \
+    gcc-${GCC_VER} g++-${GCC_VER} \
     libbabeltrace-ctf-dev systemtap-sdt-dev libslang2-dev libelf-dev libunwind-dev libdw-dev libiberty-dev
+
+# install clang
+RUN wget https://apt.llvm.org/llvm.sh && chmod +x llvm.sh \
+    && ./llvm.sh ${CLANG_VER} all && rm -f llvm.sh
 
 # Set selected clang version as default
 RUN ln -s /usr/bin/clang-${CLANG_VER} /usr/bin/clang \
