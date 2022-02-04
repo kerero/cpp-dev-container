@@ -42,9 +42,9 @@ RUN export CC=gcc-8 && export CXX=g++-8 \
 
 #################################################################################################
 FROM base as codechecker-builder
-
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt install -y python3-dev python3-venv nodejs npm
+    && apt install -y python3-dev python3-venv nodejs
 RUN git clone https://github.com/Ericsson/CodeChecker.git --depth 1 /codechecker
 SHELL ["/bin/bash", "-c"]
 ENV BUILD_LOGGER_64_BIT_ONLY=YES
