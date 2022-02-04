@@ -1,4 +1,6 @@
 # C++ Development Container
+[![Docker Publish](https://github.com/OriKerer/cpp-dev-container/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/OriKerer/cpp-dev-container/actions/workflows/docker-publish.yml)
+
 A modern development environment for cmake based C++ projects\
 Pre-configured with the latest tools and vs code extensions
 
